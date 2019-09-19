@@ -3,48 +3,9 @@ Compatibility module for high-level h5py
 """
 import sys
 import six
+from os import fspath, fsencode, fsdecode
 
 WINDOWS_ENCODING = "mbcs"
-
-
-try:
-    from os import fspath
-except ImportError:
-    def fspath(path):
-        """
-        Return the string representation of the path.
-        If str or bytes is passed in, it is returned unchanged.
-        This code comes from PEP 519, modified to support earlier versions of
-        python.
-
-        This is required for python < 3.6.
-        """
-        if isinstance(path, (six.text_type, six.binary_type)):
-            return path
-
-        # Work from the object's type to match method resolution of other magic
-        # methods.
-        path_type = type(path)
-        try:
-            return path_type.__fspath__(path)
-        except AttributeError:
-            if hasattr(path_type, '__fspath__'):
-                raise
-            try:
-                import pathlib
-            except ImportError:
-                pass
-            else:
-                if isinstance(path, pathlib.PurePath):
-                    return six.text_type(path)
-
-            raise TypeError("expected str, bytes or os.PathLike object, not "
-                            + path_type.__name__)
-
-# This is from python 3.5 stdlib (hence lacks PEP 519 changes)
-# This was introduced into python 3.2, so python < 3.2 does not have this
-from os import fsencode
-from os import fsdecode
 
 
 def filename_encode(filename):
