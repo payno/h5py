@@ -11,8 +11,6 @@
     Implements high-level support for HDF5 file objects.
 """
 
-from __future__ import absolute_import
-
 import sys
 import os
 from warnings import warn
@@ -417,7 +415,7 @@ class File(Group):
                 if swmr and mode == 'r':
                     self._swmr_mode = True
 
-        Group.__init__(self, fid)
+        super(File, self).__init__(fid)
 
     def close(self):
         """ Close the file.  All open objects become invalid """

@@ -11,8 +11,6 @@
     Implements support for high-level dataset access.
 """
 
-from __future__ import absolute_import
-
 import posixpath as pp
 import sys
 from warnings import warn
@@ -398,7 +396,7 @@ class Dataset(HLObject):
         """
         if not isinstance(bind, h5d.DatasetID):
             raise ValueError("%s is not a DatasetID" % bind)
-        HLObject.__init__(self, bind)
+        super(Dataset, self).__init__(bind)
 
         self._dcpl = self.id.get_create_plist()
         self._dxpl = h5p.create(h5p.DATASET_XFER)

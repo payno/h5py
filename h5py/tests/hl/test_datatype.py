@@ -2,8 +2,6 @@
     Tests for the h5py.Datatype class.
 """
 
-from __future__ import absolute_import
-
 from itertools import count
 import platform
 import numpy as np

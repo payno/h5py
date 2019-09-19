@@ -11,8 +11,6 @@
     Implements support for high-level access to HDF5 groups.
 """
 
-from __future__ import absolute_import, division
-
 import posixpath as pp
 import six
 import numpy
@@ -39,7 +37,7 @@ class Group(HLObject, MutableMappingHDF5):
         with phil:
             if not isinstance(bind, h5g.GroupID):
                 raise ValueError("%s is not a GroupID" % bind)
-            HLObject.__init__(self, bind)
+            super(Group, self).__init__(bind)
 
 
     _gcpl_crt_order = h5p.create(h5p.GROUP_CREATE)

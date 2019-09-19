@@ -1,6 +1,4 @@
 
-from __future__ import absolute_import
-
 from . import ( test_attrs,
                 test_attrs_data,
                 test_base,
