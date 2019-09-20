@@ -22,7 +22,7 @@ import os.path as op
 import setup_build, setup_configure
 
 
-VERSION = '2.9.0.post0'
+VERSION = '2.10.0'
 
 NUMPY_DEP = 'numpy>=1.7'
 
@@ -148,11 +148,11 @@ setup(
   url = 'http://www.h5py.org',
   download_url = 'https://pypi.python.org/pypi/h5py',
   packages = ['h5py', 'h5py._hl', 'h5py.tests',
-              'h5py.tests.old', 'h5py.tests.hl',
-              'h5py.tests.hl.test_vds'],
+              'h5py.tests.test_vds'],
   package_data = package_data,
   ext_modules = [Extension('h5py.x',['x.c'])],  # To trick build into running build_ext
   install_requires = RUN_REQUIRES,
   setup_requires = SETUP_REQUIRES if use_setup_requires else [],
+  python_requires='>=3.6',
   cmdclass = CMDCLASS,
 )

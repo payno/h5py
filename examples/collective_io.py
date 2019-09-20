@@ -11,7 +11,6 @@ Note: Must build the h5py with parallel hdf5
 from mpi4py import MPI
 import numpy as np
 import h5py
-import time
 import sys
 
 #"run as "mpirun -np 64 python-mpi collective_io.py 1 file.h5"

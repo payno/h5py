@@ -55,7 +55,17 @@ class TestCase(ut.TestCase):
     def mktemp(self, suffix='.hdf5', prefix='', dir=None):
         if dir is None:
             dir = self.tempdir
-        return tempfile.mktemp(suffix, prefix, dir=self.tempdir)
+        return tempfile.mktemp(suffix, prefix, dir=dir)
+
+    def mktemp_mpi(self, comm=None, suffix='.hdf5', prefix='', dir=None):
+        if comm is None:
+            from mpi4py import MPI
+            comm = MPI.COMM_WORLD
+        fname = None
+        if comm.Get_rank() == 0:
+            fname = self.mktemp(suffix, prefix, dir)
+        fname = comm.bcast(fname, 0)
+        return fname
 
     def setUp(self):
         self.f = h5py.File(self.mktemp(), 'w')
